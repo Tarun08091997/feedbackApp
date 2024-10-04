@@ -6,8 +6,8 @@ function Login() {
 
 
   return (
-    <div className="flex justify-center items-center h-screen bg-[rgba(0,0,0,0.2)]">
-      <div className="w-full w-[70%] md:w-[40%] p-[4%] rounded-lg shadow-lg shadow-black bg-red-600">
+    <div className="flex justify-center w-full h-full top-0 left-0 z-10 absolute items-center bg-[rgba(0,0,0,0.2)]">
+      <div className="w-full w-[70%] md:w-[40%] p-[4%] rounded-lg shadow-lg shadow-black  ">
         <h2 className="text-2xl mb-4">Login</h2>
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2">user ID</label>
