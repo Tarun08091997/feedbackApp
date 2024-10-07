@@ -9,6 +9,6 @@ router.route("/updatePassword/:userID").put(isAuthorised("superAdmin"), changePa
 
 router.route("/deleteUser/:userId").delete(isAuthorised("superAdmin"), deleteUserByUserId);
 
-router.route("/").get(isAuthorised("admin", "superAdmin"), getAllUsers).post(isAuthorised("admin", "superAdmin"), createUser);
+// router.route("/").get(isAuthorised("admin", "superAdmin"), getAllUsers).post(isAuthorised("admin", "superAdmin"), createUser);
 
 module.exports = router;

@@ -22,6 +22,8 @@ exports.createUser = async (req, res, next) => {
         });
     }
 };
+
+
 // Get User names
 exports.getAllUserDetails = async (req, res, next) => {
     try {

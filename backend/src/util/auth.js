@@ -41,3 +41,33 @@ exports.isAuthorised = function(...roles){
         
     }
 }
+
+
+exports.isLogedIn = async(req,res,next) =>{
+    console.log(req.cookies);
+    const { token } = req.cookies;
+    if(!token){
+        return res.status(400).json({
+            success:false,
+            message:"Please login First"
+        })
+    }
+    const { id } = jwt.verify(token , process.env.SECRETE_KEY);
+    if(!id){
+        return res.status(400).json({
+            success:false,
+            message:"Login Token is wrong"
+        })
+    }
+    const user = await UserModel.findById(id);
+    if(!user){
+        return res.status(404).json({
+            success:false,
+            message:"User Not found"
+        })
+    }
+    res.status(200).json({
+        success:true,
+        message:{"name" : user.name , 'userID' : user.userId}
+    });
+}
