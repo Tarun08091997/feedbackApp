@@ -1,13 +1,27 @@
 import { useState } from 'react';
-
-function Login() {
+import axios from "axios";
+function Login({setView}) {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleLogin = async() =>{
+    try{
+      const response = await axios.post("http://localhost:4000/user/login",{
+        "userId" : userId,
+        "password" : password
+      })
+      console.log(response);
+      if(response.data.success){
+        setView(false);
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
 
   return (
-    <div className="flex justify-center w-full h-full top-0 left-0 z-10 absolute items-center bg-[rgba(0,0,0,0.2)]">
-      <div className="w-full w-[70%] md:w-[40%] p-[4%] rounded-lg shadow-lg shadow-black  ">
+    <div className="flex justify-center w-full h-full top-0 left-0 z-10 absolute items-center bg-[rgba(0,0,0,0.8)]">
+      <div className="w-[70%] md:w-[40%] p-[4%] rounded-lg shadow-lg shadow-black  bg-white">
         <h2 className="text-2xl mb-4">Login</h2>
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2">user ID</label>
@@ -31,7 +45,7 @@ function Login() {
             required
           />
         </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button onClick={handleLogin} type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Login
         </button>
       </div>

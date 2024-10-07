@@ -3,6 +3,9 @@ const dotenv = require("dotenv");
 
 const app = express();
 const cookieParser = require('cookie-parser');
+const cors = require("cors")
+
+app.use(cors({}));
 
 // use Middleware
 app.use(express.json());
