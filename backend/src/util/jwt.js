@@ -6,13 +6,13 @@ exports.sendCookie = async (user , res)=>{
         'token',
         token,
         {
-            maxAge: process.env.COOKIE_AGE * 24 * 60 * 60 * 1000,
-            httpOnly:true,
-            sameSite: 'None'
+            expires: new Date(Date.now() + process.env.EXPIRES_IN * 24 * 60 * 60* 1000),
+            // httpOnly:true,
+            SameSite: 'lax'
         }
     ).json({
         success : true,
-        message:"Logged In"
+        message:{"name" : user.name , 'userID' : user.userId}
     })
 
 }

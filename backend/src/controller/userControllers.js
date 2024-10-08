@@ -40,7 +40,7 @@ exports.getAllUserDetails = async (req, res, next) => {
 
 
 
-exports.getAllUers = async (req, res) => {
+exports.getAllUers = async (req, res,next) => {
     try {
         const users = await UserModel.find();
         res.json(users);

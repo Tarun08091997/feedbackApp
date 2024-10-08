@@ -44,7 +44,6 @@ exports.isAuthorised = function(...roles){
 
 
 exports.isLogedIn = async(req,res,next) =>{
-    console.log(req.cookies);
     const { token } = req.cookies;
     if(!token){
         return res.status(400).json({

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from "axios";
-function Login({setView}) {
+function Login({setView , setUser}) {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -9,10 +9,13 @@ function Login({setView}) {
       const response = await axios.post("http://localhost:4000/user/login",{
         "userId" : userId,
         "password" : password
+      }, {
+        withCredentials: true // Include cookies in requests
       })
-      console.log(response);
+
       if(response.data.success){
         setView(false);
+        setUser(response.data.message);
       }
     }catch(err){
       console.log(err);

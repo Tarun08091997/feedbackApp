@@ -9,11 +9,18 @@ import axios from "axios";
 function App() {
   const [viewLogin , setViewLogin]= useState(true);
   const [viewPage , setViewPage] = useState("Create");
+  const [user,setUser] = useState({});
   
   const checkLogin = async()=>{
     try{
-      const response = await axios.get("http://localhost:4000/checkLogin");
-      console.log(response);
+      const response = await axios.get("http://localhost:4000/checkLogin", {
+        withCredentials: true // Include cookies in requests
+      });
+
+      if(response.data.success){
+        setViewLogin(false);
+        setUser(response.data.message);
+      }
     }catch(err){
       console.log("we are getting error" , err);
       if(err.response.data.success == false){
@@ -30,13 +37,13 @@ function App() {
 
   return (
     <div className="w-full h-full m-0 p-0">
-      <NavbarPage setPage = {setViewPage}/>
+      <NavbarPage setPage = {setViewPage} user={user} setViewLogin={setViewLogin} setUser={setUser}/>
       {/* <Body /> */}
 
       {viewPage == "See" && <SeeSuggestionPage /> }
       {viewPage == "Create" && <CreateSuggestionPage />}
 
-      {viewLogin && <Login setView={setViewLogin}/>}
+      {viewLogin && <Login setView={setViewLogin} setUser = {setUser}/>}
     </div>
   )
 }
